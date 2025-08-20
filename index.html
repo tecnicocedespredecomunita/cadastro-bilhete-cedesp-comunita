@@ -3,56 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Bilhete Único</title>
+    <title>Página de Cadastro</title>
+    <!-- Inclui Tailwind CSS para um estilo moderno e responsivo -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');" rel="stylesheet">
+    <!-- Inclui a fonte Inter do Google Fonts para uma tipografia limpa -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Define a fonte Inter para todo o corpo do documento */
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f3f4f6;
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Cor de fundo suave */
         }
 
+        /* Estilo para focar na borda de elementos de formulário (inputs e selects) */
+        /* Aplicando o blur discreto e a cor #92008C */
         input:focus, select:focus {
-            outline: none;
-            border-color: #92008C;
-            box-shadow: 0 0 0 3px rgba(146, 0, 140, 0.3);
-            transition: all 0.2s ease-in-out;
+            outline: none; /* Remove o outline padrão do navegador */
+            border-color: #92008C; /* Cor da borda ao focar */
+            box-shadow: 0 0 0 3px rgba(146, 0, 140, 0.3); /* #92008C com 30% de opacidade para um blur sutil/glow */
+            transition: all 0.2s ease-in-out; /* Adiciona uma transição suave ao foco */
         }
 
+        /* Estilo para o botão "Enviar Cadastro" quando INATIVO (disabled) */
         #submitButton:disabled {
-            background-color: #F8F8F8;
-            border: none;
-            color: #9CA3AF;
-            font-weight: bold;
+            background-color: #F8F8F8; /* Um branco levemente acinzentado para o fundo */
+            border: none; /* Borda removida */
+            color: #9CA3AF; /* Cor do texto cinza mais escura para inatividade */
+            font-weight: bold; /* Peso da fonte bold */
             cursor: not-allowed;
-            opacity: 0.8;
-            box-shadow: none;
+            opacity: 0.8; /* Opacidade ajustada para 0.8 para um aspecto mais "acinzentado" */
+            box-shadow: none; /* Remove qualquer sombra padrão do Tailwind */
         }
 
+        /* Estilo para o botão "Enviar Cadastro" quando ATIVO (não disabled) */
         #submitButton:not(:disabled) {
-            background-color: #92008C;
-            color: white;
-            font-weight: bold;
-            border: solid 2px #92008C;
-            transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+            background-color: #92008C; /* Cor de fundo do botão ativo */
+            color: white; /* Cor da fonte branca */
+            font-weight: bold; /* Peso da fonte bold */
+            border: solid 2px #92008C; /* Borda sólida da mesma cor do fundo para consistência */
+            transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out; /* Transição suave */
         }
 
+        /* Estilo para o hover do botão quando ativo */
         #submitButton:not(:disabled):hover {
-            background-color: #7a0075;
+            background-color: #7a0075; /* Um tom ligeiramente mais escuro para o hover */
             border-color: #7a0075;
         }
 
+        /* Cor da seleção do checkbox quando marcado */
         input[type="checkbox"] {
+            /* Define a cor de preenchimento do checkbox quando marcado */
             accent-color: #92008C;
         }
 
+        /* Ajuste para a cor do ícone de ajuda no hover/focus */
         #helpBilheteBtn:hover svg, #helpBilheteBtn:focus svg {
-            color: #92008C;
+            color: #92008C; /* Ícone na cor #92008C no hover/focus */
         }
         #helpBilheteBtn:hover, #helpBilheteBtn:focus {
-             color: #92008C;
+             color: #92008C; /* Texto do botão na cor #92008C no hover/focus */
         }
 
+        /* Estilos para o Modal de Alerta Customizado */
         .custom-alert-modal {
             position: fixed;
             top: 0;
@@ -69,9 +81,9 @@
         .custom-alert-content {
             background-color: white;
             padding: 2rem;
-            border-radius: 0.75rem;
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-            max-width: 28rem;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); /* shadow-lg */
+            max-width: 28rem; /* max-w-md */
             width: 90%;
             text-align: center;
             position: relative;
@@ -84,143 +96,12 @@
             background: none;
             border: none;
             font-size: 1.5rem;
-            color: #9CA3AF;
+            color: #9CA3AF; /* gray-400 */
             cursor: pointer;
             line-height: 1;
         }
         .custom-alert-close-btn:hover {
-            color: #6B7280;
-        }
-
-        .input-error {
-            border-color: #EF4444;
-            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.3);
-        }
-
-        .error-message {
-            color: #EF4444;
-            font-size: 0.875rem;
-            margin-top: 0.25rem;
-        }
-        
-        .countdown-box {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            border-radius: 16px;
-            /*border: 0.5px solid #6a00653a;*/
-            /*background: linear-gradient(135deg, #92008C 0%, #6a0065 100%);*/
-            color:linear-gradient(to right,#E87E55, #92008C,#ff206a);
-            border-radius: 12px;
-            padding: 2rem;
-            margin-bottom: 1.5rem;
-           /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);*/
-        }
-        
-        .countdown-timer {
-            font-family: 'Poppins', sans-serif;
-            font-size: 2rem;
-            font-weight: 900;
-            width: 18.125rem;
-            letter-spacing: 2.5px;
-            text-align: center;
-            margin: 0.5rem 0 ;
-            /*background-color: #6a0065;*/
-        }
-        
-        .countdown-labels {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 0.5rem;
-            width: 18.125rem;
-            font-size: 0.75rem;
-            opacity: 0.9;
-            padding: 0 0px 0 0px;
-            text-align: center;
-           /* background-color: #9CA3AF;*/
-        }
-        
-        .countdown-label {
-            display: flex;
-           /*background-color: #6a0065;*/
-            justify-content: space-around;
-            text-align: center;
-            padding: 0 5px;
-            margin: 0 0 0 22px;
-        }
-
-        /*.countdown-label {
-            flex: 1;
-            text-align: center;
-            padding: 0 5px;
-            margin: 0 10px 0 10px;
-        }*/
-        
-        .admin-panel {
-            background-color: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-top: 2rem;
-        }
-        
-        .admin-config-box {
-            background-color: white;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-        
-        .triangle-icon {
-            display: inline-block;
-            width: 0;
-            height: 0;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-bottom: 17.3px solid #EF4444;
-            position: relative;
-            margin-right: 10px;
-        }
-        
-        .triangle-icon::after {
-            content: "!";
-            position: absolute;
-            top: 5px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: white;
-            font-weight: bold;
-            font-size: 14px;
-        }
-        
-        .unavailable-page {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 400px;
-            text-align: center;
-        }
-        
-        .time-input-group {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 0.75rem;
-            margin-bottom: 1rem;
-        }
-        
-        .time-input {
-            text-align: center;
-        }
-        
-        .time-input-label {
-            display: block;
-            text-align: center;
-            font-size: 0.75rem;
-            margin-top: 0.25rem;
-            color: #6b7280;
+            color: #6B7280; /* gray-500 */
         }
     </style>
 </head>
@@ -228,47 +109,38 @@
     <!-- Contêiner principal do formulário, centralizado e com sombra -->
     <div id="formContainer" class="bg-white p-8 rounded-xl shadow-lg w-full max-w-2xl">
         <!-- Espaço para a imagem responsiva com padding ajustado -->
-        <div class="pt-10 mb-10 text-center">
+        <div class="pt-10 mb-10 text-center"> <!-- Mais padding superior e inferior -->
             <img src="CEDESP.png" alt="Logo da Instituição" class="mx-auto w-auto h-auto max-h-16 rounded-lg">
         </div>
 
         <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Cadastro de Bilhete Único</h1>
-        
-        <!-- Contador regressivo -->
-        <div id="countdownContainer" class="countdown-box hidden">
-            <p class="text-center font-medium mb-2">A planilha ficará disponível por:</p>
-            <div id="countdownTimer" class="countdown-timer">00 : 00 : 00 : 00</div>
-            <div class="countdown-labels">
-                <span class="countdown-label">dias</span>
-                <span class="countdown-label">horas</span>
-                <span class="countdown-label">minutos</span>
-                <span class="countdown-label">segundos</span>
-            </div>
-        </div>
 
         <form id="registrationForm" class="space-y-6">
-            <!-- Campos do formulário (mantidos do código original) -->
+            <!-- Campo: Nome Completo -->
             <div>
                 <label for="nomeCompleto" class="block text-gray-700 text-sm font-medium mb-2">Nome Completo:</label>
                 <input type="text" id="nomeCompleto" name="nomeCompleto" required
                        class="w-full p-3 border border-gray-300 rounded-lg"
                        aria-label="Nome completo do aluno">
-                <div id="nomeCompletoError" class="error-message hidden">Por favor, informe seu nome completo (mínimo 2 palavras)</div>
             </div>
 
+            <!-- Campo: CPF -->
             <div>
                 <label for="cpf" class="block text-gray-700 text-sm font-medium mb-2">CPF:</label>
-                <input type="text" id="cpf" name="cpf" required
+                <input type="text" id="cpf" name="cpf" required pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}"
                        placeholder="000.000.000-00"
                        class="w-full p-3 border border-gray-300 rounded-lg"
                        aria-label="Número de CPF no formato 000.000.000-00">
-                <div id="cpfError" class="error-message hidden">CPF inválido. Verifique o número digitado.</div>
+                <p class="text-xs text-gray-500 mt-1">Formato: 000.000.000-00</p>
             </div>
 
+            <!-- Campo: Número do Bilhete com Ícone de Ajuda -->
             <div>
                 <div class="flex items-center justify-between mb-2">
                     <label for="numeroBilhete" class="block text-gray-700 text-sm font-medium">Número do Bilhete:</label>
+                    <!-- Botão de ajuda com ícone de informação -->
                     <button type="button" id="helpBilheteBtn" class="text-blue-500 hover:text-blue-700 text-sm font-medium focus:outline-none flex items-center group" aria-label="Ajuda sobre o número do bilhete">
+                        <!-- Ícone SVG de informação -->
                         <svg class="w-5 h-5 mr-1 text-blue-500 group-hover:text-blue-700 transition duration-150 ease-in-out" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9.247a.75.75 0 01.968-.081l2.365 1.774c.231.173.355.452.355.733s-.124.56-.355.733l-2.365 1.774a.75.75 0 01-1.049-.247 6.002 6.002 0 010-8.878zM12 21a9 9 0 110-18 9 9 0 010 18z"></path>
                         </svg>
@@ -278,9 +150,9 @@
                 <input type="text" id="numeroBilhete" name="numeroBilhete" required
                        class="w-full p-3 border border-gray-300 rounded-lg"
                        aria-label="Número do bilhete">
-                <div id="bilheteError" class="error-message hidden">Número do bilhete deve conter 11 dígitos</div>
             </div>
 
+            <!-- Campo: Curso (Select) -->
             <div>
                 <label for="curso" class="block text-gray-700 text-sm font-medium mb-2">Curso:</label>
                 <select id="curso" name="curso" required
@@ -299,6 +171,7 @@
                 </select>
             </div>
 
+            <!-- Campo: Turma do Curso Profissionalizante (Select) -->
             <div>
                 <label for="turmaProfissionalizante" class="block text-gray-700 text-sm font-medium mb-2">Turma do Curso Profissionalizante:</label>
                 <select id="turmaProfissionalizante" name="turmaProfissionalizante" required
@@ -312,6 +185,7 @@
                 </select>
             </div>
 
+            <!-- Campo: Turma Formação Humana (Select) -->
             <div>
                 <label for="turmaFormacaoHumana" class="block text-gray-700 text-sm font-medium mb-2">Turma Formação Humana:</label>
                 <select id="turmaFormacaoHumana" name="turmaFormacaoHumana" required
@@ -336,6 +210,7 @@
                 </select>
             </div>
 
+            <!-- Checkbox de Confirmação -->
             <div class="flex items-center">
                 <input type="checkbox" id="confirmCheckbox"
                        class="h-4 w-4 border-gray-300 rounded focus:ring-blue-500"
@@ -343,32 +218,33 @@
                 <label for="confirmCheckbox" class="ml-2 block text-sm text-gray-900">Confirmo a veracidade dos dados acima</label>
             </div>
 
+            <!-- Botão de Enviar -->
             <div>
                 <button type="submit" id="submitButton" disabled
-                        class="w-full p-3 rounded-lg font-semibold shadow-md transition duration-200 ease-in-out flex items-center justify-center"
+                        class="w-full p-3 rounded-lg font-semibold shadow-md transition duration-200 ease-in-out"
                         aria-label="Botão para enviar o cadastro">
-                    <span id="buttonText">Enviar Cadastro</span>
-                    <svg id="buttonSpinner" class="hidden w-5 h-5 ml-2 text-white animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
+                    Enviar Cadastro
                 </button>
             </div>
 
+            <!-- Mensagem de Status (sucesso/erro) -->
             <div id="statusMessage" class="text-center mt-4 text-sm font-medium hidden" role="alert"></div>
         </form>
     </div>
 
-    <!-- Mensagem de Sucesso -->
+    <!-- Mensagem de Sucesso (inicialmente oculta) -->
     <div id="successMessageContainer" class="hidden bg-white p-8 rounded-xl shadow-lg w-full max-w-2xl text-center flex flex-col items-center justify-center min-h-[400px]">
+        <!-- Imagem "CEDESP" inserida na tela de sucesso -->
         <img src="CEDESP.png" alt="Logo da Instituição" class="mx-auto w-auto h-auto max-h-16 rounded-lg mb-8">
-        <svg class="w-16 h-16 text-[#B800B1] mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <!-- Ícone de check de sucesso, agora menor e laranja -->
+        <svg class="w-16 h-16 text-[#FF6A00] mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
         <h2 class="text-3xl font-bold text-gray-800 mb-4">Cadastro Realizado com Sucesso!</h2>
         <p class="text-lg text-gray-700 mb-8">Parabéns! Seus dados foram registrados com sucesso. Agradecemos a sua colaboração. Você já pode fechar esta página.</p>
+        <!-- Botão para retornar ao formulário, com estilo personalizado -->
         <button id="backToFormSuccess" class="bg-white text-[#92008C] p-3 rounded-lg font-semibold shadow-md border-2 border-[#92008C] hover:bg-[#92008C] hover:text-white transition duration-200 mt-6">Realizar Novo Cadastro</button>
     </div>
 
-    <!-- Mensagem de Erro -->
+    <!-- Mensagem de Erro (inicialmente oculta) -->
     <div id="errorMessageContainer" class="hidden bg-white p-8 rounded-xl shadow-lg w-full max-w-2xl text-center flex flex-col items-center justify-center min-h-[400px]">
         <svg class="w-24 h-24 text-red-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
         <h2 class="text-3xl font-bold text-gray-800 mb-4">Ops! Algo deu errado...</h2>
@@ -377,89 +253,24 @@
         <button id="backToFormError" class="bg-blue-500 text-white p-3 rounded-lg font-semibold shadow-md hover:bg-blue-600 transition duration-200">Tentar Novamente</button>
     </div>
 
-    <!-- Página de Indisponibilidade (com painel de admin) -->
-    <div id="unavailablePage" class="hidden bg-white p-8 rounded-xl shadow-lg w-full max-w-2xl">
-        <div class="unavailable-page mb-8">
-            <img src="CEDESP.png" alt="Logo da Instituição" class="mx-auto w-auto h-auto max-h-16 rounded-lg mb-8">
-            <h2 class="text-3xl font-bold text-gray-800 mb-4">Prazo para Cadastro Encerrado</h2>
-            <p class="text-lg text-gray-700 mb-6">O link será habilitado em:</p>
-            <div id="unavailableCountdown" class="countdown-timer mb-2">00 : 00 : 00 : 00</div>
-            <div class="countdown-labels mb-8">
-                <span class="countdown-label">dias</span>
-                <span class="countdown-label">horas</span>
-                <span class="countdown-label">minutos</span>
-                <span class="countdown-label">segundos</span>
-            </div>
-        </div>
-        
-        <!-- Painel de Administração (só visível quando ?admin) -->
-        <div id="adminPanel" class="admin-panel hidden">
-            <h2 class="text-xl font-bold text-gray-800 mb-4 text-center">Painel de Controle</h2>
-            
-            <!-- Configuração do tempo ativo -->
-            <div class="admin-config-box">
-                <h3 class="text-lg font-semibold text-gray-700 mb-4">Tempo de Disponibilidade do Formulário</h3>
-                <div class="time-input-group">
-                    <div>
-                        <input type="number" id="activeDays" min="0" placeholder="0" class="time-input w-full p-3 border border-gray-300 rounded-lg">
-                        <span class="time-input-label">dias</span>
-                    </div>
-                    <div>
-                        <input type="number" id="activeHours" min="0" max="23" placeholder="0" class="time-input w-full p-3 border border-gray-300 rounded-lg">
-                        <span class="time-input-label">horas</span>
-                    </div>
-                    <div>
-                        <input type="number" id="activeMinutes" min="0" max="59" placeholder="0" class="time-input w-full p-3 border border-gray-300 rounded-lg">
-                        <span class="time-input-label">minutos</span>
-                    </div>
-                    <div>
-                        <input type="number" id="activeSeconds" min="0" max="59" placeholder="0" class="time-input w-full p-3 border border-gray-300 rounded-lg">
-                        <span class="time-input-label">segundos</span>
-                    </div>
-                </div>
-                <button id="enableFormButton" class="w-full bg-[#92008C] text-white p-3 rounded-lg font-semibold shadow-md hover:bg-[#7a0075] transition duration-200">Habilitar Formulário</button>
-            </div>
-            
-            <!-- Configuração do tempo inativo -->
-            <div class="admin-config-box">
-                <h3 class="text-lg font-semibold text-gray-700 mb-4">Tempo até Próxima Disponibilidade</h3>
-                <div class="time-input-group">
-                    <div>
-                        <input type="number" id="inactiveDays" min="0" placeholder="0" class="time-input w-full p-3 border border-gray-300 rounded-lg">
-                        <span class="time-input-label">dias</span>
-                    </div>
-                    <div>
-                        <input type="number" id="inactiveHours" min="0" max="23" placeholder="0" class="time-input w-full p-3 border border-gray-300 rounded-lg">
-                        <span class="time-input-label">horas</span>
-                    </div>
-                    <div>
-                        <input type="number" id="inactiveMinutes" min="0" max="59" placeholder="0" class="time-input w-full p-3 border border-gray-300 rounded-lg">
-                        <span class="time-input-label">minutos</span>
-                    </div>
-                    <div>
-                        <input type="number" id="inactiveSeconds" min="0" max="59" placeholder="0" class="time-input w-full p-3 border border-gray-300 rounded-lg">
-                        <span class="time-input-label">segundos</span>
-                    </div>
-                </div>
-                <button id="setNextPeriodButton" class="w-full bg-[#92008C] text-white p-3 rounded-lg font-semibold shadow-md hover:bg-[#7a0075] transition duration-200">Configurar Próximo Período</button>
-            </div>
-        </div>
-    </div>
 
     <!-- Modal de Ajuda para o Número do Bilhete -->
     <div id="bilheteHelpModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden p-4">
         <div class="bg-white p-6 rounded-xl shadow-xl max-w-lg w-full relative">
+            <!-- Botão para fechar o modal -->
             <button id="closeBilheteHelp" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-2xl font-bold" aria-label="Fechar ajuda do bilhete">&times;</button>
             <h2 class="text-2xl font-bold text-gray-800 mb-4 text-center">Onde encontrar o número do Bilhete?</h2>
             <div class="space-y-6">
                 <div>
                     <h3 class="text-lg font-semibold text-gray-700 mb-2">Bilhete Único Comum:</h3>
-                    <img src="https://placehold.co/400x200/cccccc/333333?text=Bilhete+Comum" alt="Exemplo de Bilhete Único Comum" class="w-full rounded-lg shadow-sm">
-                    <p class="text-sm text-gray-600 mt-2 text-center">Geralmente localizado na frente, abaixo del chip ou na parte inferior.</p>
+                    <!-- Imagem de exemplo para Bilhete Comum -->
+                    <img src="bilhete-comum.png" alt="Exemplo de Bilhete Único Comum" class="w-full h-auto max-h-40 object-contain rounded-lg shadow-sm mx-auto">
+                    <p class="text-sm text-gray-600 mt-2 text-center">Geralmente localizado na frente, abaixo do chip ou na parte inferior.</p>
                 </div>
                 <div>
                     <h3 class="text-lg font-semibold text-gray-700 mb-2">Bilhete Único Estudante:</h3>
-                    <img src="https://placehold.co/400x200/999999/ffffff?text=Bilhete+Estudante" alt="Exemplo de Bilhete Único Estudante" class="w-full rounded-lg shadow-sm">
+                    <!-- Imagem de exemplo para Bilhete Estudante -->
+                    <img src="bilhete-estudante.png" alt="Exemplo de Bilhete Único Estudante" class="w-full h-auto max-h-40 object-contain rounded-lg shadow-sm mx-auto">
                     <p class="text-sm text-gray-600 mt-2 text-center">Pode estar na frente ou no verso, próximo à foto ou informações pessoais.</p>
                 </div>
                 <p class="text-sm text-gray-700 text-center font-medium">Observe as áreas circuladas ou destacadas em seu bilhete.</p>
@@ -467,268 +278,66 @@
         </div>
     </div>
 
-    <!-- Modal de Alerta para Duplicidade - MODIFICADO -->
+    <!-- Modal de Alerta para Duplicidade -->
     <div id="duplicateAlertModal" class="custom-alert-modal hidden">
         <div class="custom-alert-content">
             <button id="closeDuplicateAlert" class="custom-alert-close-btn">&times;</button>
-            <div class="flex justify-center mb-4">
-                <div class="triangle-icon"></div>
-            </div>
-            <h2 class="text-xl font-bold text-gray-800 mb-4 text-center">Número Cadastrado</h2>
-            <p id="duplicateAlertMessage" class="text-lg text-gray-700 mb-6 text-center">Este número de bilhete já está cadastrado em nosso sistema.</p>
-            <div class="text-center">
-                <button id="okDuplicateAlert" class="bg-white text-[#92008C] px-6 py-3 rounded-lg font-semibold shadow-md border-2 border-[#92008C] hover:bg-[#92008C] hover:text-white transition duration-200">OK</button>
-            </div>
+            <h2 class="text-xl font-bold text-gray-800 mb-4">Atenção!</h2>
+            <p id="duplicateAlertMessage" class="text-lg text-gray-700 mb-4"></p>
+            <button id="okDuplicateAlert" class="bg-blue-500 text-white p-2 rounded-lg font-semibold shadow-md hover:bg-blue-600 transition duration-200">OK</button>
         </div>
     </div>
 
     <script>
+        // Adiciona um listener para garantir que o DOM esteja completamente carregado antes de executar o script
         document.addEventListener('DOMContentLoaded', (event) => {
+            // URL do Google Apps Script Web App para envio dos dados
             const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxQU3mIoqvHXY71SAHe3Cjx-cDZ82ixGOOgMvpdkGTB2sBgPUwk2Sw77ux3OQv9Ojjy4g/exec';
 
             // Referências aos elementos do DOM
-            const formContainer = document.getElementById('formContainer');
+            const formContainer = document.getElementById('formContainer'); // O contêiner principal do formulário
             const registrationForm = document.getElementById('registrationForm');
             const confirmCheckbox = document.getElementById('confirmCheckbox');
             const submitButton = document.getElementById('submitButton');
             const statusMessage = document.getElementById('statusMessage');
             const cpfInput = document.getElementById('cpf');
-            const numeroBilheteInput = document.getElementById('numeroBilhete');
+            const numeroBilheteInput = document.getElementById('numeroBilhete'); // Nova referência
+
+            // Referências aos elementos do modal de ajuda do bilhete
             const helpBilheteBtn = document.getElementById('helpBilheteBtn');
             const bilheteHelpModal = document.getElementById('bilheteHelpModal');
             const closeBilheteHelp = document.getElementById('closeBilheteHelp');
+
+            // Referências aos contêineres de mensagem de sucesso e erro
             const successMessageContainer = document.getElementById('successMessageContainer');
             const errorMessageContainer = document.getElementById('errorMessageContainer');
-            const backToFormSuccessBtn = document.getElementById('backToFormSuccess');
+            const backToFormSuccessBtn = document.getElementById('backToFormSuccess'); // Referência ao botão de sucesso
             const backToFormErrorBtn = document.getElementById('backToFormError');
+
+            // Referências aos elementos do Modal de Alerta para Duplicidade
             const duplicateAlertModal = document.getElementById('duplicateAlertModal');
             const duplicateAlertMessage = document.getElementById('duplicateAlertMessage');
             const closeDuplicateAlertBtn = document.getElementById('closeDuplicateAlert');
             const okDuplicateAlertBtn = document.getElementById('okDuplicateAlert');
-            const nomeCompletoError = document.getElementById('nomeCompletoError');
-            const cpfError = document.getElementById('cpfError');
-            const bilheteError = document.getElementById('bilheteError');
-            const buttonText = document.getElementById('buttonText');
-            const buttonSpinner = document.getElementById('buttonSpinner');
-            const countdownContainer = document.getElementById('countdownContainer');
-            const countdownTimer = document.getElementById('countdownTimer');
-            const unavailablePage = document.getElementById('unavailablePage');
-            const unavailableCountdown = document.getElementById('unavailableCountdown');
-            const adminPanel = document.getElementById('adminPanel');
-            
-            // Novos elementos para o painel de administração
-            const activeDays = document.getElementById('activeDays');
-            const activeHours = document.getElementById('activeHours');
-            const activeMinutes = document.getElementById('activeMinutes');
-            const activeSeconds = document.getElementById('activeSeconds');
-            const inactiveDays = document.getElementById('inactiveDays');
-            const inactiveHours = document.getElementById('inactiveHours');
-            const inactiveMinutes = document.getElementById('inactiveMinutes');
-            const inactiveSeconds = document.getElementById('inactiveSeconds');
-            const enableFormButton = document.getElementById('enableFormButton');
-            const setNextPeriodButton = document.getElementById('setNextPeriodButton');
-
-            // Verificar se é admin pela URL
-            const urlParams = new URLSearchParams(window.location.search);
-            const isAdmin = urlParams.has('admin');
-            
-            // Verificar disponibilidade da planilha
-            checkSpreadsheetAvailability();
-
-            // Mostrar painel de admin se for admin
-            if (isAdmin) {
-                adminPanel.classList.remove('hidden');
-            }
 
             // --- Simulação de Banco de Dados de Registros Existentes ---
+            // Em uma aplicação real, estes dados viriam de um backend (ex: Firestore).
+            // Para demonstração, temos alguns CPFs/Bilhetes "já cadastrados".
             const simulatedRegisteredCPFs = new Set(['111.111.111-11', '222.222.222-22']);
             const simulatedRegisteredBilhetes = new Set(['12345678901', '98765432109']);
             // -----------------------------------------------------------
 
-            // Função para verificar disponibilidade da planilha
-            function checkSpreadsheetAvailability() {
-                const spreadsheetSettings = JSON.parse(localStorage.getItem('spreadsheetSettings') || '{}');
-                
-                if (spreadsheetSettings.enabledUntil) {
-                    const now = new Date().getTime();
-                    const enabledUntil = spreadsheetSettings.enabledUntil;
-                    
-                    if (now < enabledUntil) {
-                        // Planilha está disponível
-                        formContainer.classList.remove('hidden');
-                        unavailablePage.classList.add('hidden');
-                        countdownContainer.classList.remove('hidden');
-                        startCountdown(enabledUntil, countdownTimer, function() {
-                            // Callback quando o tempo expirar
-                            checkSpreadsheetAvailability();
-                        });
-                    } else {
-                        // Planilha expirou
-                        formContainer.classList.add('hidden');
-                        unavailablePage.classList.remove('hidden');
-                        countdownContainer.classList.add('hidden');
-                        
-                        // Verificar se há próximo período agendado
-                        if (spreadsheetSettings.nextEnableDate) {
-                            startCountdown(spreadsheetSettings.nextEnableDate, unavailableCountdown, function() {
-                                // Callback quando o tempo expirar
-                                checkSpreadsheetAvailability();
-                            });
-                        } else {
-                            unavailableCountdown.textContent = "00 : 00 : 00 : 00";
-                        }
-                    }
-                } else {
-                    // Planilha nunca foi habilitada
-                    formContainer.classList.add('hidden');
-                    unavailablePage.classList.remove('hidden');
-                    countdownContainer.classList.add('hidden');
-                    unavailableCountdown.textContent = "00 : 00 : 00 : 00";
-                }
-            }
-
-            // Função para iniciar contagem regressiva
-            function startCountdown(targetDate, element, callback) {
-                // Limpar qualquer intervalo anterior
-                if (element.countdownInterval) {
-                    clearInterval(element.countdownInterval);
-                }
-                
-                element.countdownInterval = setInterval(() => {
-                    const now = new Date().getTime();
-                    const distance = targetDate - now;
-                    
-                    if (distance < 0) {
-                        clearInterval(element.countdownInterval);
-                        element.textContent = "00 : 00 : 00 : 00";
-                        if (callback) callback();
-                        return;
-                    }
-                    
-                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                    
-                    element.textContent = `${padZero(days)} : ${padZero(hours)} : ${padZero(minutes)} : ${padZero(seconds)}`;
-                }, 1000);
-            }
-
-            // Função para adicionar zero à esquerda
-            function padZero(num) {
-                return num.toString().padStart(2, '0');
-            }
-
-            // Habilitar formulário pelo tempo configurado
-            if (enableFormButton) {
-                enableFormButton.addEventListener('click', function() {
-                    const days = parseInt(activeDays.value) || 0;
-                    const hours = parseInt(activeHours.value) || 0;
-                    const minutes = parseInt(activeMinutes.value) || 0;
-                    const seconds = parseInt(activeSeconds.value) || 0;
-                    
-                    if (days === 0 && hours === 0 && minutes === 0 && seconds === 0) {
-                        alert('Por favor, informe um tempo válido.');
-                        return;
-                    }
-                    
-                    const now = new Date().getTime();
-                    const totalMs = (days * 24 * 60 * 60 * 1000) + 
-                                   (hours * 60 * 60 * 1000) + 
-                                   (minutes * 60 * 1000) + 
-                                   (seconds * 1000);
-                    
-                    const enabledUntil = now + totalMs;
-                    
-                    const spreadsheetSettings = JSON.parse(localStorage.getItem('spreadsheetSettings') || '{}');
-                    spreadsheetSettings.enabledUntil = enabledUntil;
-                    
-                    localStorage.setItem('spreadsheetSettings', JSON.stringify(spreadsheetSettings));
-                    alert(`Formulário habilitado por ${days}d ${hours}h ${minutes}m ${seconds}s.`);
-                    
-                    checkSpreadsheetAvailability();
-                });
-            }
-
-            // Configurar próximo período
-            if (setNextPeriodButton) {
-                setNextPeriodButton.addEventListener('click', function() {
-                    const days = parseInt(inactiveDays.value) || 0;
-                    const hours = parseInt(inactiveHours.value) || 0;
-                    const minutes = parseInt(inactiveMinutes.value) || 0;
-                    const seconds = parseInt(inactiveSeconds.value) || 0;
-                    
-                    if (days === 0 && hours === 0 && minutes === 0 && seconds === 0) {
-                        alert('Por favor, informe um tempo válido.');
-                        return;
-                    }
-                    
-                    const now = new Date().getTime();
-                    const totalMs = (days * 24 * 60 * 60 * 1000) + 
-                                   (hours * 60 * 60 * 1000) + 
-                                   (minutes * 60 * 1000) + 
-                                   (seconds * 1000);
-                    
-                    const nextEnableDate = now + totalMs;
-                    
-                    const spreadsheetSettings = JSON.parse(localStorage.getItem('spreadsheetSettings') || '{}');
-                    spreadsheetSettings.nextEnableDate = nextEnableDate;
-                    
-                    localStorage.setItem('spreadsheetSettings', JSON.stringify(spreadsheetSettings));
-                    alert(`Próximo período configurado para daqui a ${days}d ${hours}h ${minutes}m ${seconds}s.`);
-                    
-                    checkSpreadsheetAvailability();
-                });
-            }
-
-            // Restante do código JavaScript (validações, formatações, etc.)
-            // ... (mantido do código original)
-
             // Função para formatar o CPF em tempo real (000.000.000-00)
             function formatCPF(value) {
+                // Remove tudo que não é dígito
                 value = value.replace(/\D/g, "");
+                // Limita a 11 dígitos
                 value = value.substring(0, 11);
+                // Adiciona pontos e hífen
                 value = value.replace(/(\d{3})(\d)/, "$1.$2");
                 value = value.replace(/(\d{3})(\d)/, "$1.$2");
                 value = value.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
                 return value;
-            }
-
-            // Função para validar CPF com dígitos verificadores
-            function validarCPF(cpf) {
-                cpf = cpf.replace(/\D/g, '');
-                
-                if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) {
-                    return false;
-                }
-                
-                let soma = 0;
-                for (let i = 0; i < 9; i++) {
-                    soma += parseInt(cpf.charAt(i)) * (10 - i);
-                }
-                
-                let resto = 11 - (soma % 11);
-                let digitoVerificador1 = resto === 10 || resto === 11 ? 0 : resto;
-                
-                if (digitoVerificador1 !== parseInt(cpf.charAt(9))) {
-                    return false;
-                }
-                
-                soma = 0;
-                for (let i = 0; i < 10; i++) {
-                    soma += parseInt(cpf.charAt(i)) * (11 - i);
-                }
-                
-                resto = 11 - (soma % 11);
-                let digitoVerificador2 = resto === 10 || resto === 11 ? 0 : resto;
-                
-                return digitoVerificador2 === parseInt(cpf.charAt(10));
-            }
-
-            // Função para validar nome completo (mínimo 2 palavras)
-            function validarNomeCompleto(nome) {
-                const partesNome = nome.trim().split(/\s+/);
-                return partesNome.length >= 2;
             }
 
             // Função para remover formatação de CPF/Bilhete para validação
@@ -738,7 +347,7 @@
 
             // Função para exibir mensagens de status temporárias no formulário (ex: "Enviando...")
             function showStatusMessage(message, type = 'info') {
-                if (!statusMessage) return;
+                if (!statusMessage) return; // Garante que o elemento existe
                 statusMessage.textContent = message;
                 statusMessage.classList.remove('hidden', 'text-green-600', 'text-red-600');
                 
@@ -746,64 +355,17 @@
                     statusMessage.classList.add('text-green-600');
                 } else if (type === 'error') {
                     statusMessage.classList.add('text-red-600');
-                } else {
-                    statusMessage.style.color = '#92008C';
+                } else { // Para 'info', cor do CTA ativo
+                    statusMessage.style.color = '#92008C'; // Cor específica para "Enviando..."
                 }
                 statusMessage.classList.remove('hidden');
                 
                 if (type !== 'error') {
                     setTimeout(() => {
                         statusMessage.classList.add('hidden');
-                        statusMessage.style.color = '';
+                        statusMessage.style.color = ''; // Reseta a cor para o padrão (se houver)
                     }, 5000);
                 }
-            }
-
-            // Função para mostrar erro de validação em um campo
-            function showFieldError(field, errorElement, message) {
-                field.classList.add('input-error');
-                errorElement.textContent = message;
-                errorElement.classList.remove('hidden');
-            }
-
-            // Função para limpar erro de validação de um campo
-            function clearFieldError(field, errorElement) {
-                field.classList.remove('input-error');
-                errorElement.classList.add('hidden');
-            }
-
-            // Função para validar todos os campos do formulário
-            function validateForm() {
-                let isValid = true;
-                const nomeCompleto = document.getElementById('nomeCompleto');
-                const cpfValue = cleanNumber(cpfInput.value);
-                const bilheteValue = cleanNumber(numeroBilheteInput.value);
-                
-                // Validar nome completo
-                if (!validarNomeCompleto(nomeCompleto.value)) {
-                    showFieldError(nomeCompleto, nomeCompletoError, 'Por favor, informe seu nome completo (mínimo 2 palavras)');
-                    isValid = false;
-                } else {
-                    clearFieldError(nomeCompleto, nomeCompletoError);
-                }
-                
-                // Validar CPF
-                if (!validarCPF(cpfValue)) {
-                    showFieldError(cpfInput, cpfError, 'CPF inválido. Verifique o número digitado.');
-                    isValid = false;
-                } else {
-                    clearFieldError(cpfInput, cpfError);
-                }
-                
-                // Validar número do bilhete
-                if (bilheteValue.length !== 11) {
-                    showFieldError(numeroBilheteInput, bilheteError, 'Número do bilhete deve conter 11 dígitos');
-                    isValid = false;
-                } else {
-                    clearFieldError(numeroBilheteInput, bilheteError);
-                }
-                
-                return isValid;
             }
 
             // Função para exibir o modal de alerta customizado
@@ -823,16 +385,17 @@
 
             // Função para alternar entre o formulário e as mensagens de feedback
             function showFeedbackScreen(type) {
-                if (formContainer) formContainer.classList.add('hidden');
-                if (bilheteHelpModal) bilheteHelpModal.classList.add('hidden');
+                if (formContainer) formContainer.classList.add('hidden'); // Esconde o formulário
+                if (bilheteHelpModal) bilheteHelpModal.classList.add('hidden'); // Garante que o modal de ajuda esteja oculto
 
                 if (type === 'success') {
-                    if (successMessageContainer) successMessageContainer.classList.remove('hidden');
-                    if (errorMessageContainer) errorMessageContainer.classList.add('hidden');
+                    if (successMessageContainer) successMessageContainer.classList.remove('hidden'); // Mostra a mensagem de sucesso
+                    if (errorMessageContainer) errorMessageContainer.classList.add('hidden'); // Garante que a mensagem de erro esteja oculta
                 } else if (type === 'error') {
-                    if (errorMessageContainer) errorMessageContainer.classList.remove('hidden');
-                    if (successMessageContainer) successMessageContainer.classList.add('hidden');
+                    if (errorMessageContainer) errorMessageContainer.classList.remove('hidden'); // Mostra a mensagem de erro
+                    if (successMessageContainer) successMessageContainer.classList.add('hidden'); // Garante que a mensagem de sucesso esteja oculta
                 }
+                // Oculta a mensagem de status temporária
                 if (statusMessage) statusMessage.classList.add('hidden');
             }
 
@@ -840,33 +403,19 @@
             function resetFormAndShow() {
                 if (successMessageContainer) successMessageContainer.classList.add('hidden');
                 if (errorMessageContainer) errorMessageContainer.classList.add('hidden');
-                if (formContainer) formContainer.classList.remove('hidden');
-                if (registrationForm) registrationForm.reset();
-                if (confirmCheckbox) confirmCheckbox.checked = false;
+                if (formContainer) formContainer.classList.remove('hidden'); // Mostra o formulário novamente
+                if (registrationForm) registrationForm.reset(); // Limpa todos os campos do formulário
+                if (confirmCheckbox) confirmCheckbox.checked = false; // Desmarca o checkbox
                 if (submitButton) {
-                    submitButton.disabled = true;
-                    submitButton.textContent = 'Enviar Cadastro';
+                    submitButton.disabled = true; // Desabilita o botão novamente
+                    submitButton.textContent = 'Enviar Cadastro'; // Restaura o texto do botão
                 }
-                
-                // Limpar erros de validação
-                clearFieldError(document.getElementById('nomeCompleto'), nomeCompletoError);
-                clearFieldError(cpfInput, cpfError);
-                clearFieldError(numeroBilheteInput, bilheteError);
             }
 
             // Adiciona evento de input para formatar o CPF enquanto o usuário digita
             if (cpfInput) {
                 cpfInput.addEventListener('input', function(e) {
                     e.target.value = formatCPF(e.target.value);
-                    clearFieldError(cpfInput, cpfError);
-                });
-            }
-
-            // Adiciona evento de input para validar nome completo em tempo real
-            const nomeCompletoInput = document.getElementById('nomeCompleto');
-            if (nomeCompletoInput) {
-                nomeCompletoInput.addEventListener('input', function() {
-                    clearFieldError(nomeCompletoInput, nomeCompletoError);
                 });
             }
 
@@ -880,19 +429,11 @@
             // Manipula o envio do formulário
             if (registrationForm) {
                 registrationForm.addEventListener('submit', async function(event) {
-                    event.preventDefault();
+                    event.preventDefault(); // Impede o envio padrão do formulário (recarregamento da página)
 
-                    // Verificar se a planilha ainda está disponível
-                    const spreadsheetSettings = JSON.parse(localStorage.getItem('spreadsheetSettings') || '{}');
-                    if (spreadsheetSettings.enabledUntil && new Date().getTime() > spreadsheetSettings.enabledUntil) {
-                        showStatusMessage('O prazo para cadastro expirou. Não é possível enviar o formulário.', 'error');
-                        checkSpreadsheetAvailability();
-                        return;
-                    }
-
-                    // Validação completa dos campos
-                    if (!validateForm()) {
-                        showStatusMessage('Por favor, corrija os erros destacados antes de enviar.', 'error');
+                    // Validação básica do lado do cliente (verifica campos required)
+                    if (!registrationForm.checkValidity()) {
+                        showStatusMessage('Oops! Parece que você esqueceu de preencher algum campo obrigatório. Por favor, verifique e tente novamente.', 'error');
                         return;
                     }
 
@@ -903,31 +444,27 @@
                     // --- Validação de Duplicidade Simulada ---
                     if (simulatedRegisteredCPFs.has(rawCpf)) {
                         showCustomAlert('CPF já cadastrado.');
-                        return;
+                        return; // Impede o envio
                     }
                     if (simulatedRegisteredBilhetes.has(rawNumeroBilhete)) {
                         showCustomAlert('Número de Bilhete já cadastrado.');
-                        return;
+                        return; // Impede o envio
                     }
                     // ------------------------------------------
 
                     const formData = {
                         nomeCompleto: document.getElementById('nomeCompleto')?.value,
-                        cpf: cpfInput?.value,
-                        numeroBilhete: numeroBilheteInput?.value,
+                        cpf: cpfInput?.value, // CPF já formatado
+                        numeroBilhete: numeroBilheteInput?.value, // Bilhete já formatado
                         curso: document.getElementById('curso')?.value,
                         turmaProfissionalizante: document.getElementById('turmaProfissionalizante')?.value,
-                        turmaFormacaoHumana: document.getElementById('turmaFormacaoHumana')?.value,
-                        timestamp: new Date().toISOString()
+                        turmaFormacaoHumana: document.getElementById('turmaFormacaoHumana')?.value
                     };
 
                     // Desabilita o botão e mostra status de envio
                     if (submitButton) {
                         submitButton.disabled = true;
-                        if (buttonText && buttonSpinner) {
-                            buttonText.textContent = 'Enviando...';
-                            buttonSpinner.classList.remove('hidden');
-                        }
+                        submitButton.textContent = 'Enviando...';
                         submitButton.classList.add('opacity-50', 'cursor-not-allowed');
                     }
                     showStatusMessage('Estamos enviando seus dados! Um momento, por favor...', 'info');
@@ -951,8 +488,8 @@
 
                             submissionSuccessful = true;
                             showFeedbackScreen('success');
-                            
                             // Em um cenário real, após o sucesso, você adicionaria o CPF/Bilhete ao banco de dados.
+                            // Para a simulação, podemos adicioná-los aqui para evitar futuras submissões na mesma sessão.
                             simulatedRegisteredCPFs.add(rawCpf);
                             simulatedRegisteredBilhetes.add(rawNumeroBilhete);
                         } catch (error) {
@@ -969,9 +506,8 @@
                     }
 
                     if (!submissionSuccessful) {
-                        if (submitButton && buttonText && buttonSpinner) {
-                            buttonText.textContent = 'Enviar Cadastro';
-                            buttonSpinner.classList.add('hidden');
+                        if (submitButton) {
+                            submitButton.textContent = 'Enviar Cadastro';
                             submitButton.disabled = !confirmCheckbox?.checked;
                         }
                     }
@@ -1015,6 +551,7 @@
             }
 
             // Event Listeners para os botões "Voltar ao Formulário"
+            // backToFormSuccessBtn foi re-introduzido para a tela de sucesso
             if (backToFormSuccessBtn) backToFormSuccessBtn.addEventListener('click', resetFormAndShow);
             if (backToFormErrorBtn) backToFormErrorBtn.addEventListener('click', resetFormAndShow);
         });
