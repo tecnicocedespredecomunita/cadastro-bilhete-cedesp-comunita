@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Temporariamente Indisponível</title>
+    <!-- Inclui Tailwind CSS para um estilo moderno e responsivo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inclui a fonte Inter do Google Fonts para uma tipografia limpa -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Define a fonte Inter para todo o corpo do documento */
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Define a imagem de fundo com uma camada de gradiente semi-transparente para o efeito de transparência */
+            background-image: linear-gradient(rgba(252, 132, 204, 0.7), rgba(255, 255, 255, 1.0)), url('rede.PNG');
+            background-size: cover; /* Faz com que a imagem cubra todo o fundo de forma responsiva */
+            background-position: center; /* Centraliza a imagem no fundo */
+            background-repeat: no-repeat; /* Impede que a imagem se repita */
+            background-color: #ffffff; /* Uma cor de fundo de fallback, caso a imagem não carregue */
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+    <!-- Contêiner principal, centralizado e com sombra lilás mais forte -->
+    <!-- O fundo do contêiner foi ajustado para branco para contraste com o novo fundo da página -->
+    <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-2xl text-center shadow-[0_10px_15px_rgba(200,162,200,0.9)]">
+        <!-- Logo centralizado, responsivo e com padding -->
+        <div class="pt-10 mb-10 text-center">
+            <img src="logo_CEDESP_2024.jpg" alt="Logo da Instituição" class="mx-auto w-auto h-auto max-h-16 rounded-lg">
+        </div>
+        <!-- Mensagem de aviso com texto preto no título e rosa no parágrafo -->
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Site Temporariamente Fora do Ar</h1>
+        <p class="text-lg md:text-xl text-fuchsia-500 mb-8">Por favor, retorne no dia <strong><B>07/09/2025</strong></B> ou procure o setor técnico do CEDESP REDE COMUNITÁ SÃO MATEUS para mais informações.</p>
+    </div>
+</body>
+</html>
