@@ -174,7 +174,7 @@
                     </button>
                 </div>
                 <input type="text" id="numeroBilhete" name="numeroBilhete" required class="w-full p-3 rounded-lg" aria-label="Número do bilhete">
-                <div id="bilheteError" class="error-message hidden">Número do bilhete deve conter 11 dígitos</div>
+                <div id="bilheteError" class="error-message hidden">Este campo é obrigatório.</div>
             </div>
 
             <div>
@@ -516,8 +516,8 @@
                     }
                 }
                  if (field.id === 'numeroBilhete') {
-                    if (field.value.replace(/\D/g, '').length !== 11) {
-                        showFieldError(numeroBilheteInput, bilheteError, 'Número do bilhete deve conter 11 dígitos.');
+                    if (field.value.trim() === '') {
+                        showFieldError(numeroBilheteInput, bilheteError, 'O número do bilhete é obrigatório.');
                     } else {
                         clearFieldError(numeroBilheteInput, bilheteError);
                     }
@@ -539,8 +539,8 @@
                     isValid = false;
                 } else { clearFieldError(cpfInput, cpfError); }
                 
-                if (numeroBilheteInput.value.replace(/\D/g, '').length !== 11) {
-                    showFieldError(numeroBilheteInput, bilheteError, 'Número do bilhete deve conter 11 dígitos.');
+                if (numeroBilheteInput.value.trim() === '') {
+                    showFieldError(numeroBilheteInput, bilheteError, 'O número do bilhete é obrigatório.');
                     isValid = false;
                 } else { clearFieldError(numeroBilheteInput, bilheteError); }
 
